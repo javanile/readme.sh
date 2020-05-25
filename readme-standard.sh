@@ -36,6 +36,7 @@ else
   echo "${section}: ok!"
 fi
 
+echo ${usage} ${testing}
 if (( usage > testing )); then
   error "Move the 'Usage' section on top of the 'Testing' section"
 else
