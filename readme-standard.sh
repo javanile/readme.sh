@@ -12,22 +12,26 @@ error() {
 
 section=Usage
 usage=$(has_section "## ${section}")
-if [ -z "${usage}" ]; then
+if [[ -z "${usage}" ]]; then
   error "Missing ${section} section, added by defulat at end of ${input}, refactor could required."
   (
     echo "## ${section}"
     echo "This is how to use this"
     echo "This is how to use this"
   ) >> ${input}
+else
+  echo "${section}: ok!"
 fi
 
 section=Testing
 testing=$(has_section "## ${section}")
-if [ -z "${testing}" ]; then
+if [[ -z "${testing}" ]]; then
   error "Missing ${section} section, added by defulat at end of ${input}, refactor could required."
   (
     echo "## ${section}"
     echo "This is how to use this"
     echo "This is how to use this"
   ) >> ${input}
+else
+  echo "${section}: ok!"
 fi
