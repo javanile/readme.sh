@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-grep -e "^## Usage$"
+input=README.md
+
+grep -e "^## Usage$" ${input}
 
 
 
