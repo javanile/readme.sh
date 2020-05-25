@@ -23,7 +23,7 @@ fi
 
 section=Testing
 testing=$(has_section "## ${section}")
-if [ -z "${usage}" ]; then
+if [ -z "${testing}" ]; then
   error "Missing ${section} section, added by defulat at end of ${input}, refactor could required."
   (
     echo "## ${section}"
