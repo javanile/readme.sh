@@ -1,44 +1,32 @@
 #!/usr/bin/env bash
 
 input=README.md
+declare -A section
 
 has_section() {
-  grep -e "^${1}$" ${input} | cut -d: -f1
+  grep -ne "^${1}$" ${input} | cut -d: -f1
 }
 
 error() {
   echo ">>> $1"
 }
 
-section=Usage
-usage=$(has_section "## ${section}")
-if [[ -z "${usage}" ]]; then
-  error "Missing ${section} section, added by defulat at end of ${input}, refactor could required."
-  (
-    echo "## ${section}"
-    echo "This is how to use this"
-    echo "This is how to use this"
-  ) >> ${input}
-else
-  echo "${section}: ok!"
+section_name=Usage
+section[${section_name}]=$(has_section "## ${section_name}")
+if [[ -z "section[${section_name}]" ]]; then
+  error "Missing ${section_name} section, added by defulat at end of ${input}, refactor could required."
+  echo "## ${section_name}" >> ${input}
+  echo "This is how to use this" >> ${input}
 fi
 
-section=Testing
-testing=$(has_section "## ${section}")
-if [[ -z "${testing}" ]]; then
+section_name=Testing
+section[${section_name}]=$(has_section "## ${section_name}")
+if [[ -z "$section[${section_name}]" ]]; then
   error "Missing ${section} section, added by defulat at end of ${input}, refactor could required."
-  (
-    echo "## ${section}"
-    echo "This is how to use this"
-    echo "This is how to use this"
-  ) >> ${input}
-else
-  echo "${section}: ok!"
+  echo "## ${section}" >> ${input}
+  echo "This is how to use this" >> ${input}
 fi
 
-echo ${usage} ${testing}
-if (( usage > testing )); then
+if [[ "${section[Usage]}" -gt "${section[Testing]}" ]]; then
   error "Move the 'Usage' section on top of the 'Testing' section"
-else
-  echo "ok!"
 fi
