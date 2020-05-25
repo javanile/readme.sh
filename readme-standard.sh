@@ -38,4 +38,6 @@ fi
 
 if (( usage > testing )); then
   error "Move the 'Usage' section on top of the 'Testing' section"
+else
+  echo "ok!"
 fi
