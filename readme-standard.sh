@@ -2,7 +2,10 @@
 
 input=README.md
 
-grep -e "^## Usage$" ${input}
-
+if ! grep -e "^## Usage$" ${input}; then
+  echo "A"
+else 
+  echo "B"
+fi
 
 
