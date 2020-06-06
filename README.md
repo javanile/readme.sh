@@ -1,54 +1,31 @@
-# readme-standard
+# Readme Standard
 
-
-
-# lcov.sh
-
-> The best LCOV framework around a BASH project
-
-background details relevant to understanding what this module does
+This repository maintains all script to validate
+Readme files standard of all Javanile projects
 
 ## Usage
 
-```js
-var lcovSh = require('lcov.sh')
-
-console.log('hello warld')
+```bash
+curl -sL https://javanile.org/readme-standard/check.sh | bash -
 ```
-
-outputs
-
-```
-hello warld
-```
-
-## API
-
-```js
-var lcovSh = require('lcov.sh')
-```
-
-See [api_formatting.md](api_formatting.md) for tips.
 
 ## Install
 
-With [npm](https://npmjs.org/) installed, run
-
-```
-$ npm install lcov.sh
-```
+Nothing to install
 
 ## Acknowledgments
 
-lcov.sh was inspired by..
+Nothing to know about
+
+## Testing
+
+Nothing to test
 
 ## See Also
 
+- [`markdownlint`](https://github.com/markdownlint/markdownlint)
 - [`noffle/common-readme`](https://github.com/noffle/common-readme)
-- ...
 
 ## License
 
 MIT
-## Testing
-

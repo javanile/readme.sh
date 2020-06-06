@@ -14,7 +14,7 @@ require_section() {
 }
 
 order_section () {
-  echo "${section[$1]} ${section[$2]}"
+  #echo "${section[$1]} ${section[$2]}"
   if [[ "${section[$1]}" -gt "${section[$2]}" ]]; then
     error "Move the '$1' section on top of the '$2' section"
   fi
@@ -31,3 +31,9 @@ require_section "Usage"
 require_section "Testing"
 
 order_section "Usage" "Testing"
+
+if [[ -z "$(command -v mdl)" ]]; then
+  echo "To improve MARKDOWN quality install Markdown list tool with: sudo gem install mdl"
+else
+  mdl ${input}
+fi

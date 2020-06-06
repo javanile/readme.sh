@@ -1,4 +1,4 @@
 
 
 qa:
-	bash readme-standard.sh
+	bash check.sh
