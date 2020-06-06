@@ -50,3 +50,5 @@ lcov.sh was inspired by..
 ## License
 
 MIT
+## Testing
+

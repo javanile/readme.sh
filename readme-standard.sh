@@ -1,32 +1,33 @@
 #!/usr/bin/env bash
+set -e
 
 input=README.md
 declare -A section
 
-has_section() {
-  grep -ne "^${1}$" ${input} | cut -d: -f1
+require_section() {
+  section[${1}]=$(grep -ne "^## ${1}$" ${input} | cut -d: -f1)
+  if [[ -z "${section[${1}]}" ]]; then
+    echo "## ${1}" >> ${input}
+    echo "${2}" >> ${input}
+    error "Missing '${1}' section, adding by default at end of '${input}', refactor could required."
+  fi
+}
+
+order_section () {
+  echo "${section[$1]} ${section[$2]}"
+  if [[ "${section[$1]}" -gt "${section[$2]}" ]]; then
+    error "Move the '$1' section on top of the '$2' section"
+  fi
 }
 
 error() {
-  echo ">>> $1"
+  echo ">>> |"
+  echo ">>> | ERROR: $1"
+  echo ">>> |"
+  exit 1
 }
 
-section_name=Usage
-section[${section_name}]=$(has_section "## ${section_name}")
-if [[ -z "section[${section_name}]" ]]; then
-  error "Missing ${section_name} section, added by defulat at end of ${input}, refactor could required."
-  echo "## ${section_name}" >> ${input}
-  echo "This is how to use this" >> ${input}
-fi
+require_section "Usage"
+require_section "Testing"
 
-section_name=Testing
-section[${section_name}]=$(has_section "## ${section_name}")
-if [[ -z "$section[${section_name}]" ]]; then
-  error "Missing ${section} section, added by defulat at end of ${input}, refactor could required."
-  echo "## ${section}" >> ${input}
-  echo "This is how to use this" >> ${input}
-fi
-
-if [[ "${section[Usage]}" -gt "${section[Testing]}" ]]; then
-  error "Move the 'Usage' section on top of the 'Testing' section"
-fi
+order_section "Usage" "Testing"
